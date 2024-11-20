@@ -1,22 +1,16 @@
-# Backend build stage
-FROM gcc:latest AS backend
+# Backend stage
+FROM gcc:latest as backend
 WORKDIR /app
-COPY ./build /app/build
-COPY ./CMakeLists.txt /app
 COPY ./src /app/src
+COPY ./CMakeLists.txt /app
+RUN apt-get update && apt-get install -y cmake
+RUN cmake . && make
 
-# Final stage
-FROM nginx:alpine
+# Frontend stage
+FROM nginx:latest
 WORKDIR /usr/share/nginx/html
+COPY ./public . 
 
-# Copy backend executable
-COPY --from=backend /app/build/bin/Debug/flight-booking.exe /usr/local/bin/
-
-# Copy frontend assets
-COPY ./public .
-
-# Expose port
+# Start nginx server
 EXPOSE 80
-
-# Start nginx and executable
-CMD ["sh", "-c", "nginx -g 'daemon off;' & /usr/local/bin/flight-booking.exe"]
+CMD ["nginx", "-g", "daemon off;"]
