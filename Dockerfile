@@ -12,8 +12,9 @@ RUN apt-get update && apt-get install -y \
     cmake \
     build-essential \
     git \
+    curl \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
-
 # Clone vcpkg
 RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg
 
