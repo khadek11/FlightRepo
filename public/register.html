@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign UP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js"></script>
+    
+</head>
+<body>
+<div class="container">
+    <div class="animated-border">
+        <span class="horizontal top" style="--i:0;"></span>
+        <span class="horizontal top" style="--i:1;"></span>
+        <span class="horizontal top" style="--i:2;"></span>
+        <span class="horizontal top" style="--i:3;"></span>
+        <span class="vertical right" style="--i:4;"></span>
+        <span class="vertical right" style="--i:5;"></span>
+        <span class="vertical right" style="--i:6;"></span>
+        <span class="vertical right" style="--i:7;"></span>
+        <span class="horizontal bottom" style="--i:8;"></span>
+        <span class="horizontal bottom" style="--i:9;"></span>
+        <span class="horizontal bottom" style="--i:10;"></span>
+        <span class="horizontal bottom" style="--i:11;"></span>
+        <span class="vertical left" style="--i:12;"></span>
+        <span class="vertical left" style="--i:13;"></span>
+        <span class="vertical left" style="--i:14;"></span>
+        <span class="vertical left" style="--i:15;"></span>
+    </div>
+
+    <div class="login-box">
+        <h2>Sign Up</h2>
+        <form id="registrationForm" method="POST">
+            <div class="input-box">
+                <input type="text" id="name" name="name" required placeholder="">
+                <label>Name</label>
+            </div>
+            
+            <div class="input-box">
+                <input type="email" id="email" name="email" required placeholder="">
+                <label>Email</label>
+            </div>
+            
+            <div class="input-box">
+                <input type="password" id="password" name="password" required placeholder="">
+                <label>Password</label>
+            </div>
+            
+            <div class="forgot-pass">
+                <a href="#">forgot your password</a>
+            </div>
+            
+            <button type="submit" class="btn">Sign Up</button>
+            
+            <div class="signup-link">
+               Arleady have an account<a href="login.html">Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('registrationForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    };
+    
+    try {
+        const response = await fetch('http://localhost:8080/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            alert('Registration successful!');
+            window.location.href = 'home.html';
+        } else {
+            alert(data.message || 'Registration failed');
+        }
+    } catch (error) {
+        alert('Error connecting to server');
+        console.error('Error:', error);
+    }
+});
+</script>
+</body>
+</html>

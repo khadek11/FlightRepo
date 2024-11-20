@@ -1,0 +1,10 @@
+^C:\USERS\DELL\DOCUMENTS\SANDY\BUILD\CMAKEFILES\D7E1A6A123F8B60AD7432031E60EE5B0\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/DELL/Documents/sandy -BC:/Users/DELL/Documents/sandy/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/DELL/Documents/sandy/build/flight_booking.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

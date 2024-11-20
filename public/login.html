@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="animated-border">
+            <span class="horizontal top" style="--i:0;"></span>
+            <span class="horizontal top" style="--i:1;"></span>
+            <span class="horizontal top" style="--i:2;"></span>
+            <span class="horizontal top" style="--i:3;"></span>
+            <span class="vertical right" style="--i:4;"></span>
+            <span class="vertical right" style="--i:5;"></span>
+            <span class="vertical right" style="--i:6;"></span>
+            <span class="vertical right" style="--i:7;"></span>
+            <span class="horizontal bottom" style="--i:8;"></span>
+            <span class="horizontal bottom" style="--i:9;"></span>
+            <span class="horizontal bottom" style="--i:10;"></span>
+            <span class="horizontal bottom" style="--i:11;"></span>
+            <span class="vertical left" style="--i:12;"></span>
+            <span class="vertical left" style="--i:13;"></span>
+            <span class="vertical left" style="--i:14;"></span>
+            <span class="vertical left" style="--i:15;"></span>
+        </div>
+
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="input-box">
+                    <input type="email" id="email" required>
+                    <label>Email</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" id="password" required>
+                    <label>Password</label>
+                </div>
+
+                <div id="errorMessage"></div>
+                <button type="submit" class="btn">Login</button>
+
+                <div class="signup-link">
+                    Don't have an account? <a href="register.html">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch('http://localhost:8080/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Successful login
+                    errorMessage.style.display = 'none';
+                    // Redirect to dashboard or home page
+                    window.location.href = 'home.html';
+                } else {
+                    // Failed login
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = data.message;
+                }
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'An error occurred. Please try again later.';
+            }
+        });
+    </script>
+</body>
+</html>

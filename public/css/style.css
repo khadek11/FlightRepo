@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #cc3f7e;
+    padding: 20px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.animated-border {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.animated-border span {
+    position: absolute;
+    background: transparent;
+    animation: animateBlink 3s linear infinite;
+}
+
+.horizontal {
+    width: calc(100% / 4);
+    height: 4px;
+}
+
+.vertical {
+    width: 4px;
+    height: calc(100% / 4);
+}
+
+/* Position classes */
+.top {
+    top: 0;
+    transform: translateX(calc(var(--i) * 100%));
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
+.right {
+    right: 0;
+    transform: translateY(calc((var(--i) - 4) * 100%));
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
+.bottom {
+    bottom: 0;
+    right: 0;
+    transform: translateX(calc((var(--i) - 8) * -100%));
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
+.left {
+    left: 0;
+    bottom: 0;
+    transform: translateY(calc((var(--i) - 12) * -100%));
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
+@keyframes animateBlink {
+    0%, 100% {
+        background: #0ef;
+    }
+    50% {
+        background: #2c4766;
+    }
+}
+
+/* Add responsiveness for the animated border */
+@media screen and (max-width: 480px) {
+    .container {
+        max-width: 100%;
+        min-height: 450px;
+        padding: 15px;
+    }
+    
+    .horizontal {
+        height: 3px;
+    }
+    
+    .vertical {
+        width: 3px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        min-height: 400px;
+        padding: 10px;
+    }
+    
+    .horizontal {
+        height: 2px;
+    }
+    
+    .vertical {
+        width: 2px;
+    }
+}
+
+/* Rest of your existing CSS remains the same */
+
+.login-box {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.login-box form {
+    width: 100%;
+    padding: 0 15px;
+}
+
+h2 {
+    font-size: clamp(1.5em, 5vw, 2em);
+    color: #0ef;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    position: relative;
+    margin: 25px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #2c4766; 
+    outline: none;
+    border-radius: 40px;
+    font-size: clamp(0.875em, 3vw, 1em);
+    color: #fff;
+    padding: 0 20px;
+    transition: border-color 0.3s ease;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+    border-color: #0ef;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: clamp(0.875em, 3vw, 1em);
+    color: #fff;
+    pointer-events: none;
+    transition: all 0.3s ease;
+   
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: 0;
+    font-size: 0.85em;
+    padding: 0 6px;
+    color: #0ef;
+   
+}
+
+.forgot-pass {
+    margin: -15px 0 10px;
+    text-align: center;
+}
+
+.forgot-pass a {
+    font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+    color: #fff;
+    text-decoration: none;
+}
+
+.forgot-pass a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #0ef;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: clamp(0.875em, 3vw, 1em);
+    color: #1f293a;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #00c3d7;
+}
+
+.signup-link {
+    margin: 20px 0 10px;
+    text-align: center;
+}
+
+.signup-link a {
+    font-size: clamp(0.875em, 3vw, 1em);
+    color: #0ef;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+    .login-box {
+        padding: 15px;
+    }
+    
+    .login-box form {
+        padding: 0 10px;
+    }
+    
+    .input-box {
+        margin: 20px 0;
+    }
+    
+    .input-box input {
+        height: 45px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .login-box {
+        padding: 10px;
+    }
+    
+    .input-box {
+        margin: 15px 0;
+    }
+    
+    .input-box input {
+        height: 40px;
+        padding: 0 15px;
+    }
+}
+
+/* For larger screens */
+@media screen and (min-width: 1200px) {
+    .login-box {
+        max-width: 450px;
+    }
+}

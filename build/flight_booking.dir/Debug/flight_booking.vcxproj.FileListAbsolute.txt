@@ -1,0 +1,2 @@
+C:\Users\DELL\Documents\sandy\build\bin\Debug\sqlite3.dll
+C:\Users\DELL\Documents\sandy\build\flight_booking.dir\Debug\flight_booking.vcxproj.CopyComplete

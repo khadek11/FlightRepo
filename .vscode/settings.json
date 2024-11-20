@@ -1,0 +1,8 @@
+{
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    },
+    "cmake.generator": "Visual Studio 17 2022",
+    "cmake.buildDirectory": "C:/Users/DELL/Documents/sandy/build",
+    "liveServer.settings.port": 5501
+}
