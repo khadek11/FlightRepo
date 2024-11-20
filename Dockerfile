@@ -1,20 +1,21 @@
 # Backend build stage
-FROM gcc:latest AS backend
+FROM buildpack-deps:bullseye AS backend
 WORKDIR /app
 
-# Copy project files
-COPY CMakeLists.txt /app/
-COPY src /app/src
-COPY build /app/build
-COPY public /app/public
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    cmake \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Build the project (if needed)
+# Copy project files
+COPY . /app
+
+# Build the project
 RUN cmake . && make
 
-# Create index.html if not exists
-RUN if [ ! -f /app/public/index.html ]; then \
-    echo '<html><head><meta http-equiv="refresh" content="0;url=register.html"></head></html>' > /app/public/index.html; \
-    fi
+# Create index.html
+RUN echo '<html><head><meta http-equiv="refresh" content="0;url=register.html"></head></html>' > /app/public/index.html
 
 # Final stage
 FROM nginx:alpine
