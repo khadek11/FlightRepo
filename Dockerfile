@@ -2,8 +2,19 @@
 FROM gcc:latest AS backend
 WORKDIR /app
 COPY . /app
-RUN apt-get update && apt-get install -y cmake
-RUN cmake . && make
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    cmake \
+    build-essential \
+    libstdc++-11-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Try to configure CMake with verbose output
+RUN cmake -DCMAKE_BUILD_TYPE=Debug . || cat CMakeFiles/CMakeError.log
+
+# Build the project
+RUN make || cat CMakeFiles/CMakeOutput.log
 
 # Final stage
 FROM nginx:alpine
